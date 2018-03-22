@@ -1,0 +1,91 @@
+---
+title: "json_parse"
+author: "xiaofeng.li"
+date: "2017/12/18"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#利用tidyjson包 解析json格式字符串
+
+本文介绍用tidyjson包解析json格式的字符串
+
+##安装tidyjson包
+tidyjson包尚未在cran上发布，故需要通过github安装
+
+```{r }
+devtools::install_github("sailthru/tidyjson")
+```
+
+##tidyjson 的使用帮助
+目前tidyjson包中没有完整的教程，但开发者的github上有相应的使用实例：
+https://github.com/sailthru/tidyjson
+
+
+加载要用的包
+```{r }
+library(tidyjson)   # this package
+library(tidyverse)      # for %>% and other dplyr functions
+library(listviewer)
+```
+
+创建示例json格式字符串
+```{r }
+json <- '[{"name": "bob", "age": 32}, {"name": "susan", "age": 54}]'
+```
+查看json格式字符串的结构，方便后面解析
+```{r }
+jsonedit(json) 
+```
+解析json数组，得到稳定结构的结果
+```{r }
+json %>%            # Use the %>% pipe operator to pass json through a pipeline 
+  as.tbl_json %>%   # Parse the JSON and setup a 'tbl_json' object
+  gather_array %>%  # Gather (stack) the array by index
+  spread_values(    # Spread (widen) values to widen the data.frame
+    user.name = jstring("name"),  # Extract the "name" object as a character column "user.name"
+    user.age = jnumber("age")     # Extract the "age" object as a numeric column "user.age"
+  )
+```
+
+当array 中的字段很多时，spread_values里的代码就要有很多行，一个一个写是比较麻烦的。
+所以我们加入了辅助函数：
+```{r}
+tidyjson_gen_spread_values <- function(json_string){
+
+ key_type_code <- 
+   json_string%>%
+   gather_keys %>%
+   json_types %>%
+   select(key,type)%>%
+   distinct%>%
+   mutate(code = paste0(key," = ","j",type,"(","'",key,"'",")") )
+ 
+ key_type_code%>%
+   pull(code)%>%
+   paste0(collapse = ",\n")%>%
+   cat()
+
+}
+
+```
+
+从上面代码中要使用 spread_values的地方开始替换，替换成提取当前json中所有key：
+```{r}
+
+json %>%            # Use the %>% pipe operator to pass json through a pipeline 
+  as.tbl_json %>%   # Parse the JSON and setup a 'tbl_json' object
+  gather_array %>%  # Gather (stack) the array by index
+tidyjson_gen_spread_values
+
+
+```
+
+
+
+
