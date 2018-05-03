@@ -1,0 +1,10 @@
+field,type
+gid,character
+uuid,character
+user_id,character
+mobile,character
+type,character
+duration,numeric
+time,numeric
+apply_tm,datetime
+create_tm,timestamp

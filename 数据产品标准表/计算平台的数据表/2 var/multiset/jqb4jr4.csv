@@ -1,0 +1,8 @@
+field,type
+gid,character
+rid,character
+uuid,character
+contact1_notin_contacts,numeric
+contact2_notin_contacts,numeric
+exist_contact_notin_contacts,numeric
+both_contact_notin_contacts,numeric

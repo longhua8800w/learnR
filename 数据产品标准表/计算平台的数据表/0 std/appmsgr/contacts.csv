@@ -1,0 +1,6 @@
+field,type
+gid,character
+uuid,character
+user_id,character
+name,character
+mobile,character

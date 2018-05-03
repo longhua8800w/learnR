@@ -1,0 +1,6 @@
+field,type
+gid,character
+rid,character
+uuid,character
+model_id,character
+model_score,numeric

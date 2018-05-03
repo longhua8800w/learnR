@@ -1,0 +1,14 @@
+field,type
+gid,character
+uuid,character
+user_id,character
+name,character
+mobile,character
+mobile_is_na,numeric
+name_is_na,numeric
+name_len,integer
+mobile_1_3,character
+mobile_1_7,character
+mobile_opr,character
+mobile_acd,character
+create_tm,timestamp

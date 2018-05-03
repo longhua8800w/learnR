@@ -1,0 +1,8 @@
+field,type
+gid,character
+uuid,character
+user_id,character
+name,character
+mobile,character
+in_contactsrec_flag,numeric
+create_tm,timestamp

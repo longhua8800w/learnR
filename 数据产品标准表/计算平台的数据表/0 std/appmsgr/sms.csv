@@ -1,0 +1,9 @@
+field,type
+gid,character
+uuid,character
+user_id,character
+mobile,character
+type,character
+message,character
+dateline,character
+apply_tm,datetime
