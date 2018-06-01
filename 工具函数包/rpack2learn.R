@@ -47,7 +47,7 @@ library(live)#live : 通过了解关键因素，实施解释复杂机器学习�
 
 library(mlrCPO)  #提供了一套工具集，使得mlr（机器学习框架）更为丰富，可兼容多种预处理操作符（CPOS）.
 library(varrank) #提供用于执行变量排序和特征选择的计算工具箱.
-
+install.packages("spFSR")# 特征选择
 library(SmartEDA) # 未安装成功 # SmartEDA : 提供自动描述数据结构和关系的功能，以便于探索性数据分析.
 
 library(anomalize) # 实现一个“整洁”工作流程，用于检测时间序列数据中的异常情况，支持分解时间序列、检测异常和将多个时间序列的正常数据与异常数据进行分离等功能.
